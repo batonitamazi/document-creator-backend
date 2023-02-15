@@ -3,8 +3,11 @@ const cors = require("cors")
 const config = require('./utils/config')
 const mongoose = require('mongoose')
 const logger = require("./utils/logger")
+const middleware = require('./utils/middleware')
+const userRouter = require('./controllers/users')
 
 const app = express()
+
 mongoose.set("strictQuery", config.MONGO_URI);
 
 mongoose
@@ -17,8 +20,10 @@ mongoose
   });
 
 
-
-
 app.use(cors())
+app.use(middleware.requestLogger)
+
+app.use('/api/users/', userRouter)
+app.use(middleware.unknownEndpoint)
 
 module.exports = app
