@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const logger = require("./utils/logger");
 const middleware = require("./utils/middleware");
 const userRouter = require("./controllers/users");
+const loginRouter = require('./controllers/users');
 
 const app = express();
 
